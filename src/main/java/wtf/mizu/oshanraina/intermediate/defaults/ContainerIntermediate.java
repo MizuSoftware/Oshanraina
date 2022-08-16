@@ -6,10 +6,8 @@ import wtf.mizu.oshanraina.intermediate.ContainerProcessingIntermediate;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static java.util.Optional.empty;
 import static javax.lang.model.element.ElementKind.CONSTRUCTOR;
 import static javax.lang.model.element.Modifier.*;
 

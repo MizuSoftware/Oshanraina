@@ -3,10 +3,10 @@ package wtf.mizu.oshanraina.step;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.TypeSpec;
 import org.jetbrains.annotations.Unmodifiable;
-import wtf.mizu.oshanraina.step.defaults.JavaPoetContainerSuffixedInitializationStage;
-import wtf.mizu.oshanraina.step.defaults.JavaPoetContainerWritingStage;
-import wtf.mizu.oshanraina.intermediate.ContainerProcessingIntermediate;
 import wtf.mizu.oshanraina.Container;
+import wtf.mizu.oshanraina.step.defaults.JavaPoetContainerWritingStage;
+import wtf.mizu.oshanraina.step.defaults.JavaPoetContainerSuffixedInitializationStage;
+import wtf.mizu.oshanraina.intermediate.ContainerProcessingIntermediate;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 /**
  * A {@link ContainerProcessingStage} represents a <b>single and unique</b> stage
- * of processing for any {@link wtf.mizu.oshanraina.Container}.
+ * of processing for any {@link Container}.
  *
  * <p>
  *     There are 3 stages required to instantiate a {@link Container}:

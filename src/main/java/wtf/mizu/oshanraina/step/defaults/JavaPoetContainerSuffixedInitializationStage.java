@@ -32,7 +32,7 @@ public class JavaPoetContainerSuffixedInitializationStage implements ContainerPr
         final var containerClassName = ClassName.get(pkg,
                 element.getSimpleName().toString() + suffix);
 
-        final var typeBuilder = classBuilder(containerClassName);
+        final var typeBuilder = TypeSpec.classBuilder(containerClassName);
         return new Result(
                 typeBuilder,
                 containerClassName

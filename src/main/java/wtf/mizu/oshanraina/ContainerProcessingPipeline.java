@@ -2,14 +2,13 @@ package wtf.mizu.oshanraina;
 
 import com.google.common.collect.ImmutableList;
 import com.squareup.javapoet.JavaFile;
-import wtf.mizu.oshanraina.intermediate.ContainerProcessingIntermediate;
 import wtf.mizu.oshanraina.step.ContainerProcessingStage;
+import wtf.mizu.oshanraina.intermediate.ContainerProcessingIntermediate;
 
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * {@link ContainerProcessingPipeline} describes how a {@link Container} is

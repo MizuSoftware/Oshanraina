@@ -6,7 +6,6 @@ import com.squareup.javapoet.TypeSpec;
 import wtf.mizu.oshanraina.step.ContainerProcessingStage;
 
 import javax.annotation.processing.ProcessingEnvironment;
-import java.util.Optional;
 
 /**
  * A {@link ContainerProcessingStage.Writing} stage implementation that
