@@ -9,16 +9,16 @@ import static com.squareup.javapoet.TypeSpec.classBuilder;
 import static java.util.Arrays.copyOfRange;
 
 /**
- * An {@link ContainerProcessingStage.Initialization Initialization} stage
+ * An {@link Initialization Initialization} stage
  * that creates a {@link com.squareup.javapoet.TypeSpec.Builder TypeSpec}
  * with given suffix as a file name.
  */
-public class JavaPoetContainerSuffixedInitializationStage implements ContainerProcessingStage.Initialization {
+public class JavaPoetContainerPrefixednitializationStage implements ContainerProcessingStage.Initialization {
 
-    private final String suffix;
+    private final String prefix;
 
-    public JavaPoetContainerSuffixedInitializationStage(String suffix) {
-        this.suffix = suffix;
+    public JavaPoetContainerPrefixednitializationStage(String prefix) {
+        this.prefix = prefix;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class JavaPoetContainerSuffixedInitializationStage implements ContainerPr
                 pkgPartsWithClass.length - 1);
         final var pkg = String.join(".", pkgParts);
         final var containerClassName = ClassName.get(pkg,
-                element.getSimpleName().toString() + suffix);
+                prefix + element.getSimpleName().toString());
 
         final var typeBuilder = classBuilder(containerClassName);
         return new Result(

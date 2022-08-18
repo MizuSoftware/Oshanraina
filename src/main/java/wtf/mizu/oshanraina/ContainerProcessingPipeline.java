@@ -2,6 +2,7 @@ package wtf.mizu.oshanraina;
 
 import com.google.common.collect.ImmutableList;
 import com.squareup.javapoet.JavaFile;
+import wtf.mizu.oshanraina.intermediate.defaults.ContainerIntermediate;
 import wtf.mizu.oshanraina.step.ContainerProcessingStage;
 import wtf.mizu.oshanraina.intermediate.ContainerProcessingIntermediate;
 
@@ -45,7 +46,7 @@ public class ContainerProcessingPipeline {
 
     public void tryProcessing(Element e) throws Exception {
         final var result = initialization.initialize(e);
-        for(final var intermediate: intermediary.intermediates()) {
+        for (final var intermediate : intermediary.intermediates()) {
             intermediate.process(result.type(), e, result.containerName());
         }
         writing.write(result.containerName(), result.type());
@@ -53,9 +54,9 @@ public class ContainerProcessingPipeline {
 
     public void tryProcessing(Iterable<? extends Element> elements) throws Exception {
         final var errors = new ArrayList<Exception>();
-        for(final var e: elements) {
+        for (final var e : elements) {
             final var result = initialization.initialize(e);
-            for(final var intermediate: intermediary.intermediates()) {
+            for (final var intermediate : intermediary.intermediates()) {
                 intermediate.process(result.type(), e, result.containerName());
             }
             final var file = JavaFile.builder(
@@ -70,11 +71,11 @@ public class ContainerProcessingPipeline {
         tryProcessing(env.getElementsAnnotatedWith(marker));
     }
 
-    public static class Builder  {
+    public static class Builder {
         private final Class<? extends Annotation> marker;
         private ContainerProcessingStage.Initialization initialization;
         private final ImmutableList.Builder<ContainerProcessingIntermediate> intermediates
-                = new ImmutableList.Builder<>();
+                = new ImmutableList.Builder<ContainerProcessingIntermediate>().add(new ContainerIntermediate());
         private ContainerProcessingStage.Writing writing;
 
         Builder(Class<? extends Annotation> marker) {

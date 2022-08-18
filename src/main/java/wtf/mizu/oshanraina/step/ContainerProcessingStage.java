@@ -42,6 +42,10 @@ import java.util.Optional;
 public interface ContainerProcessingStage {
     
     interface Initialization extends ContainerProcessingStage {
+        static Initialization withPrefix(String prefix) {
+            return new JavaPoetContainerSuffixedInitializationStage(prefix);
+        }
+
         static Initialization withSuffix(String suffix) {
             return new JavaPoetContainerSuffixedInitializationStage(suffix);
         }
