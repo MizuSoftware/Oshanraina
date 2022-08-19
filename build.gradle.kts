@@ -18,6 +18,11 @@ dependencies {
     implementation("org.jetbrains", "annotations", "23.0.0")
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 publishing {
     publications {
         create("mavenJava", MavenPublication::class.java) {

@@ -19,29 +19,28 @@ import java.util.Optional;
  * of processing for any {@link Container}.
  *
  * <p>
- *     There are 3 stages required to instantiate a {@link Container}:
- *     <ol>
- *         <li>
- *             {@link Initialization} responsible of setting up common settings
- *             to ensure a correct container processing.
- *         </li>
- *         <li>
- *             {@link Intermediary} generally responsible of processing the
- *             data contained by a container.
- *         </li>
- *         <li>
- *             {@link Writing} responsible of writing the content of the
- *             processed container.
- *         </li>
- *     </ol>
- * </p>
+ * There are 3 stages required to instantiate a {@link Container}:
+ * <ol>
+ *     <li>
+ *         {@link Initialization} responsible of setting up common settings
+ *         to ensure a correct container processing.
+ *     </li>
+ *     <li>
+ *         {@link Intermediary} generally responsible of processing the
+ *         data contained by a container.
+ *     </li>
+ *     <li>
+ *         {@link Writing} responsible of writing the content of the
+ *         processed container.
+ *     </li>
+ * </ol>
  *
  * <p>
  *     Unless all of these steps are provided, the {@link }
  * </p>
  */
 public interface ContainerProcessingStage {
-    
+
     interface Initialization extends ContainerProcessingStage {
         static Initialization withPrefix(String prefix) {
             return new JavaPoetContainerPrefixednitializationStage(prefix);
@@ -64,13 +63,14 @@ public interface ContainerProcessingStage {
          * {@link Result} is a simplistic record that wraps all the data
          * required to process a given {@link Container}.
          *
-         * @param type the type spec
+         * @param type          the type spec
          * @param containerName the container's class name
          */
         record Result(
                 TypeSpec.Builder type,
                 ClassName containerName
-        ) {}
+        ) {
+        }
     }
 
     @FunctionalInterface
@@ -80,7 +80,6 @@ public interface ContainerProcessingStage {
          * intermediates} used during this intermediate stage.
          *
          * @return the {@link ContainerProcessingIntermediate intermediates}
-         *
          * @see ContainerProcessingIntermediate
          */
         @Unmodifiable List<ContainerProcessingIntermediate> intermediates();
@@ -104,18 +103,18 @@ public interface ContainerProcessingStage {
          * applied to the future {@link Container}.
          *
          * <p>
-         *     This method is responsible of writing the file in the correct
-         *     directory and handling any exception.
+         * This method is responsible of writing the file in the correct
+         * directory and handling any exception.
          * </p>
          *
          * <p>
-         *     Unless anything went wrong, this method always returns an
-         *     empty {@link Optional}.
+         * Unless anything went wrong, this method always returns an
+         * empty {@link Optional}.
          * </p>
          *
          * @param containerName the container's name
-         * @param type the type
-         * @return an exception, if one occurred
+         * @param type          the type
+         * @throws Exception an exception, if one occurred
          */
         void write(ClassName containerName, TypeSpec.Builder type) throws Exception;
     }
