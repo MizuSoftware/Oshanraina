@@ -4,6 +4,7 @@ import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.TypeSpec;
 import org.jetbrains.annotations.Unmodifiable;
 import wtf.mizu.oshanraina.Container;
+import wtf.mizu.oshanraina.step.defaults.JavaPoetContainerPrefixednitializationStage;
 import wtf.mizu.oshanraina.step.defaults.JavaPoetContainerWritingStage;
 import wtf.mizu.oshanraina.step.defaults.JavaPoetContainerSuffixedInitializationStage;
 import wtf.mizu.oshanraina.intermediate.ContainerProcessingIntermediate;
@@ -43,7 +44,7 @@ public interface ContainerProcessingStage {
     
     interface Initialization extends ContainerProcessingStage {
         static Initialization withPrefix(String prefix) {
-            return new JavaPoetContainerSuffixedInitializationStage(prefix);
+            return new JavaPoetContainerPrefixednitializationStage(prefix);
         }
 
         static Initialization withSuffix(String suffix) {

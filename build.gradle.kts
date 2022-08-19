@@ -22,6 +22,8 @@ publishing {
     publications {
         create("mavenJava", MavenPublication::class.java) {
             from(components["java"])
+
+            artifactId = project.name.toLowerCase()
         }
     }
 }
