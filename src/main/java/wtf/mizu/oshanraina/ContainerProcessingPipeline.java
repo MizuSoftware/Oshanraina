@@ -6,6 +6,7 @@ import wtf.mizu.oshanraina.intermediate.defaults.ContainerIntermediate;
 import wtf.mizu.oshanraina.step.ContainerProcessingStage;
 import wtf.mizu.oshanraina.intermediate.ContainerProcessingIntermediate;
 
+import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import java.lang.annotation.Annotation;
@@ -44,20 +45,23 @@ public class ContainerProcessingPipeline {
         this.writing = writing;
     }
 
-    public void tryProcessing(Element e) throws Exception {
+    public void tryProcessing(ProcessingEnvironment env, Element e) throws Exception {
         final var result = initialization.initialize(e);
         for (final var intermediate : intermediary.intermediates()) {
-            intermediate.process(result.type(), e, result.containerName());
+            intermediate.process(result.type(), e, result.containerName(),
+                    env);
         }
         writing.write(result.containerName(), result.type());
     }
 
-    public void tryProcessing(Iterable<? extends Element> elements) throws Exception {
+    public void tryProcessing(ProcessingEnvironment env,
+                              Iterable<? extends Element> elements) throws Exception {
         final var errors = new ArrayList<Exception>();
         for (final var e : elements) {
             final var result = initialization.initialize(e);
             for (final var intermediate : intermediary.intermediates()) {
-                intermediate.process(result.type(), e, result.containerName());
+                intermediate.process(result.type(), e, result.containerName()
+                        , env);
             }
             final var file = JavaFile.builder(
                     result.containerName().packageName(),
@@ -67,15 +71,16 @@ public class ContainerProcessingPipeline {
         }
     }
 
-    public void tryProcessing(RoundEnvironment env) throws Exception {
-        tryProcessing(env.getElementsAnnotatedWith(marker));
+    public void tryProcessing(ProcessingEnvironment processingEnv,
+                              RoundEnvironment env) throws Exception {
+        tryProcessing(processingEnv, env.getElementsAnnotatedWith(marker));
     }
 
     public static class Builder {
         private final Class<? extends Annotation> marker;
         private ContainerProcessingStage.Initialization initialization;
         private final ImmutableList.Builder<ContainerProcessingIntermediate> intermediates
-                = new ImmutableList.Builder<ContainerProcessingIntermediate>().add(new ContainerIntermediate());
+                = new ImmutableList.Builder<ContainerProcessingIntermediate>();
         private ContainerProcessingStage.Writing writing;
 
         Builder(Class<? extends Annotation> marker) {

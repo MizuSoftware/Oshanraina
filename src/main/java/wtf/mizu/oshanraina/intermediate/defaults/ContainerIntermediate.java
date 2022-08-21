@@ -4,6 +4,8 @@ import com.squareup.javapoet.*;
 import wtf.mizu.oshanraina.Container;
 import wtf.mizu.oshanraina.intermediate.ContainerProcessingIntermediate;
 
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import java.util.stream.Collectors;
@@ -25,7 +27,7 @@ public class ContainerIntermediate implements ContainerProcessingIntermediate {
 
     @Override
     public void process(TypeSpec.Builder type, Element element,
-                    ClassName containerName) throws Exception {
+                        ClassName containerName, ProcessingEnvironment env) throws Exception {
         type.addJavadoc("Generated from {@link $T} by the " +
                 "annotation-processor", ClassName.get(element.asType()));
         type.addModifiers(PUBLIC, FINAL).addSuperinterface(ParameterizedTypeName.get(
