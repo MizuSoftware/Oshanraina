@@ -15,7 +15,9 @@ subprojects {
     }
 
     dependencies {
-        "implementation"("org.jetbrains", "annotations", "23.0.0")
+        val implementation by configurations
+
+        implementation("org.jetbrains", "annotations", "23.0.0")
     }
 
     configure<JavaPluginExtension> {
