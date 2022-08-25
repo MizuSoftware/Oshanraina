@@ -5,7 +5,6 @@ import wtf.mizu.oshanraina.Container;
 import wtf.mizu.oshanraina.intermediate.ContainerProcessingIntermediate;
 
 import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import java.util.stream.Collectors;

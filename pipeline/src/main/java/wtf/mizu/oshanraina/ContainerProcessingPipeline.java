@@ -2,9 +2,8 @@ package wtf.mizu.oshanraina;
 
 import com.google.common.collect.ImmutableList;
 import com.squareup.javapoet.JavaFile;
-import wtf.mizu.oshanraina.intermediate.defaults.ContainerIntermediate;
-import wtf.mizu.oshanraina.step.ContainerProcessingStage;
 import wtf.mizu.oshanraina.intermediate.ContainerProcessingIntermediate;
+import wtf.mizu.oshanraina.step.ContainerProcessingStage;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;

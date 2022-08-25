@@ -3,32 +3,31 @@ plugins {
     `maven-publish`
 }
 
-group   = "wtf.mizu"
-version = "0.1.0"
+allprojects {
+    apply(plugin = "java-library")
+    apply(plugin = "maven-publish")
 
-repositories {
-    // Most of the libraries designed by Mizu are published on maven
-    // central.
-    mavenCentral()
+    group   = "wtf.mizu"
+    version = "0.1.0"
 }
 
-dependencies {
-    api("com.google.guava", "guava", "31.1-jre")
-    api("com.squareup", "javapoet", "1.13.0")
-    implementation("org.jetbrains", "annotations", "23.0.0")
-}
+subprojects {
+    repositories {
+        // Most of the libraries designed by Mizu are published on maven
+        // central.
+        mavenCentral()
+    }
 
-java {
-    withJavadocJar()
-    withSourcesJar()
-}
+    java {
+        withJavadocJar()
+        withSourcesJar()
+    }
 
-publishing {
-    publications {
-        create("mavenJava", MavenPublication::class.java) {
-            from(components["java"])
-
-            artifactId = project.name.toLowerCase()
+    publishing {
+        publications {
+            create("mavenJava", MavenPublication::class.java) {
+                from(components["java"])
+            }
         }
     }
 }
