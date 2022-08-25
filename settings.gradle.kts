@@ -1,3 +1,3 @@
-rootProject.name = "Oshanraina"
+rootProject.name = "oshanraina"
 include("container")
 include("pipeline")
