@@ -28,7 +28,7 @@ public class JavaPoetSuffixedInitializationStage implements ProcessingStage.Init
      * {@inheritDoc}
      */
     @Override
-    public Result initialize(final @NotNull Element element) {
+    public @NotNull Result initialize(final @NotNull Element element) {
         return JavaPoetUtil.initializeWithPrefixOrSuffix(
                 element,
                 suffix,

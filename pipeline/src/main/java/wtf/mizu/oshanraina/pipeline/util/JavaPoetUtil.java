@@ -29,7 +29,7 @@ public class JavaPoetUtil {
      * @see wtf.mizu.oshanraina.pipeline.step.defaults.JavaPoetPrefixedInitializationStage
      * @see wtf.mizu.oshanraina.pipeline.step.defaults.JavaPoetSuffixedInitializationStage
      */
-    public static ProcessingStage.Initialization.Result initializeWithPrefixOrSuffix(
+    public static @NotNull ProcessingStage.Initialization.Result initializeWithPrefixOrSuffix(
             final @NotNull Element element,
             final @NotNull String prefixOrSuffix,
             final boolean prefix

@@ -16,12 +16,12 @@ import javax.lang.model.element.Element;
  */
 public class JavaPoetPrefixedInitializationStage
         implements ProcessingStage.Initialization {
-    private final String prefix;
+    private final @NotNull String prefix;
 
     /**
      * @param prefix the prefix to be used as a filename.
      */
-    public JavaPoetPrefixedInitializationStage(String prefix) {
+    public JavaPoetPrefixedInitializationStage(final @NotNull String prefix) {
         this.prefix = prefix;
     }
 
@@ -29,7 +29,7 @@ public class JavaPoetPrefixedInitializationStage
      * {@inheritDoc}
      */
     @Override
-    public Result initialize(final @NotNull Element element) {
+    public @NotNull Result initialize(final @NotNull Element element) {
         return JavaPoetUtil.initializeWithPrefixOrSuffix(
                 element,
                 prefix,

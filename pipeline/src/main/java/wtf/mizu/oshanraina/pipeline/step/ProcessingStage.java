@@ -40,7 +40,7 @@ public interface ProcessingStage {
          * @param prefix the prefix.
          * @return the newly created {@link JavaPoetPrefixedInitializationStage}.
          */
-        static Initialization withPrefix(String prefix) {
+        static @NotNull Initialization withPrefix(final @NotNull String prefix) {
             return new JavaPoetPrefixedInitializationStage(prefix);
         }
 
@@ -50,7 +50,7 @@ public interface ProcessingStage {
          * @param suffix the suffix.
          * @return the newly created {@link JavaPoetSuffixedInitializationStage}.
          */
-        static Initialization withSuffix(String suffix) {
+        static @NotNull Initialization withSuffix(final @NotNull String suffix) {
             return new JavaPoetSuffixedInitializationStage(suffix);
         }
 
@@ -61,7 +61,7 @@ public interface ProcessingStage {
          * @param element the element to initialize.
          * @return the {@link Result} that wraps the required data.
          */
-        Result initialize(Element element);
+        @NotNull Result initialize(final @NotNull Element element);
 
         /**
          * Wraps all the data required to process a given {@link Container}.
@@ -70,20 +70,20 @@ public interface ProcessingStage {
             /**
              * The type spec.
              */
-            public final TypeSpec.Builder type;
+            public final @NotNull TypeSpec.Builder type;
 
             /**
              * The container's class name.
              */
-            public final ClassName containerName;
+            public final @NotNull ClassName containerName;
 
             /**
              * @param type          the type spec.
              * @param containerName the container's class name.
              */
             public Result(
-                    @NotNull TypeSpec.Builder type,
-                    @NotNull ClassName containerName
+                    final @NotNull TypeSpec.Builder type,
+                    final @NotNull ClassName containerName
             ) {
                 this.type = type;
                 this.containerName = containerName;
@@ -104,7 +104,7 @@ public interface ProcessingStage {
          * @return the {@link ProcessingIntermediate intermediates}
          * @see ProcessingIntermediate
          */
-        @Unmodifiable List<ProcessingIntermediate> intermediates();
+        @Unmodifiable @NotNull List<ProcessingIntermediate> intermediates();
     }
 
     /**
@@ -117,8 +117,8 @@ public interface ProcessingStage {
          * @param env the processing environment.
          * @return a new {@link JavaPoetWritingStage}.
          */
-        static Writing usingJavaPoet(
-                ProcessingEnvironment env
+        static @NotNull Writing usingJavaPoet(
+                final @NotNull ProcessingEnvironment env
         ) {
             return new JavaPoetWritingStage(env);
         }
@@ -138,8 +138,8 @@ public interface ProcessingStage {
          * @throws Exception if something went wrong.
          */
         void write(
-                ClassName containerName,
-                TypeSpec.Builder type
+                final @NotNull ClassName containerName,
+                final @NotNull TypeSpec.Builder type
         ) throws Exception;
     }
 }

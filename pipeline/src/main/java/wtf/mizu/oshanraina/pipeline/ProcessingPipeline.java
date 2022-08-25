@@ -26,8 +26,8 @@ public class ProcessingPipeline {
      * @param annotationMarker the annotation marker.
      * @return the newly created builder.
      */
-    public static Builder builder(
-            Class<? extends Annotation> annotationMarker
+    public static @NotNull Builder builder(
+            final @NotNull Class<? extends Annotation> annotationMarker
     ) {
         return new Builder(annotationMarker);
     }
@@ -47,10 +47,10 @@ public class ProcessingPipeline {
      * @param writingStage        the writingStage stage.
      */
     public ProcessingPipeline(
-            Class<? extends Annotation> annotationMarker,
-            ProcessingStage.Initialization initializationStage,
-            ProcessingStage.Intermediary intermediaryStage,
-            ProcessingStage.Writing writingStage
+            final @NotNull Class<? extends Annotation> annotationMarker,
+            final @NotNull ProcessingStage.Initialization initializationStage,
+            final @NotNull ProcessingStage.Intermediary intermediaryStage,
+            final @NotNull ProcessingStage.Writing writingStage
     ) {
         this.annotationMarker = annotationMarker;
         this.initializationStage = initializationStage;
@@ -66,8 +66,8 @@ public class ProcessingPipeline {
      * @throws Exception if something went wrong while processing.
      */
     public void tryProcessing(
-            ProcessingEnvironment env,
-            Element element
+            final @NotNull ProcessingEnvironment env,
+            final @NotNull Element element
     ) throws Exception {
         final ProcessingStage.Initialization.Result result =
                 initializationStage.initialize(element);
@@ -95,8 +95,8 @@ public class ProcessingPipeline {
      * @throws Exception if something went wrong while processing.
      */
     public void tryProcessing(
-            ProcessingEnvironment env,
-            Iterable<? extends Element> elements
+            final @NotNull ProcessingEnvironment env,
+            final @NotNull Iterable<? extends Element> elements
     ) throws Exception {
         final List<Exception> errors = new ArrayList<>();
 
@@ -134,8 +134,8 @@ public class ProcessingPipeline {
      * @throws Exception if something went wrong while processing.
      */
     public void tryProcessing(
-            ProcessingEnvironment processingEnv,
-            RoundEnvironment env
+            final @NotNull ProcessingEnvironment processingEnv,
+            final @NotNull RoundEnvironment env
     ) throws Exception {
         tryProcessing(
                 processingEnv,
@@ -165,7 +165,7 @@ public class ProcessingPipeline {
          * @param initializationStage the new initialization stage.
          * @return this instance.
          */
-        public Builder initialization(
+        public @NotNull Builder initialization(
                 final @NotNull ProcessingStage.Initialization initializationStage
         ) {
             this.initializationStage = initializationStage;
@@ -178,7 +178,7 @@ public class ProcessingPipeline {
          * @param intermediate the new initialization stage.
          * @return this instance.
          */
-        public Builder then(
+        public @NotNull Builder then(
                 final @NotNull ProcessingIntermediate intermediate
         ) {
             intermediates.add(intermediate);
@@ -191,7 +191,7 @@ public class ProcessingPipeline {
          * @param writingStage the new writing stage.
          * @return this instance.
          */
-        public Builder writing(
+        public @NotNull Builder writing(
                 final @NotNull ProcessingStage.Writing writingStage
         ) {
             this.writingStage = writingStage;
@@ -204,7 +204,7 @@ public class ProcessingPipeline {
          *
          * @return the newly created {@link ProcessingPipeline}.
          */
-        public ProcessingPipeline create() {
+        public @NotNull ProcessingPipeline create() {
             if (initializationStage == null) {
                 throw new RuntimeException("Initialization stage was null.");
             }

@@ -2,6 +2,7 @@ package wtf.mizu.oshanraina.pipeline.step.defaults;
 
 import com.squareup.javapoet.*;
 
+import org.jetbrains.annotations.NotNull;
 import wtf.mizu.oshanraina.pipeline.step.ProcessingStage;
 
 import javax.annotation.processing.ProcessingEnvironment;
@@ -15,12 +16,12 @@ import javax.annotation.processing.ProcessingEnvironment;
  * @since 0.0.1
  */
 public class JavaPoetWritingStage implements ProcessingStage.Writing {
-    private final ProcessingEnvironment env;
+    private final @NotNull ProcessingEnvironment env;
 
     /**
      * @param env the processing environment.
      */
-    public JavaPoetWritingStage(ProcessingEnvironment env) {
+    public JavaPoetWritingStage(final @NotNull ProcessingEnvironment env) {
         this.env = env;
     }
 
@@ -29,8 +30,8 @@ public class JavaPoetWritingStage implements ProcessingStage.Writing {
      */
     @Override
     public void write(
-            ClassName containerName,
-            TypeSpec.Builder type
+            final @NotNull ClassName containerName,
+            final @NotNull TypeSpec.Builder type
     ) throws Exception {
         final JavaFile file = JavaFile.builder(
                 containerName.packageName(),
