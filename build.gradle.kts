@@ -1,33 +1,47 @@
-plugins {
-    `java-library`
-    `maven-publish`
-}
+val javaVersion = JavaVersion.VERSION_1_8
 
-allprojects {
+subprojects {
     apply(plugin = "java-library")
     apply(plugin = "maven-publish")
 
-    group   = "wtf.mizu"
+    group = "wtf.mizu"
     version = "0.1.0"
-}
 
-subprojects {
     repositories {
-        // Most of the libraries designed by Mizu are published on maven
-        // central.
+        mavenLocal()
+
+        // Most of the libraries designed by Mizu are published on Maven Central.
         mavenCentral()
     }
 
-    java {
+    dependencies {
+        "implementation"("org.jetbrains", "annotations", "23.0.0")
+    }
+
+    configure<JavaPluginExtension> {
+        toolchain {
+            languageVersion.set(
+                JavaLanguageVersion.of(javaVersion.ordinal + 1)
+            )
+        }
+
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
+
         withJavadocJar()
         withSourcesJar()
     }
 
-    publishing {
+    configure<PublishingExtension> {
         publications {
             create("mavenJava", MavenPublication::class.java) {
                 from(components["java"])
             }
         }
+    }
+
+    tasks.withType<JavaCompile> {
+        sourceCompatibility = javaVersion.toString()
+        targetCompatibility = javaVersion.toString()
     }
 }

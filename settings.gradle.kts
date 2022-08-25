@@ -1,3 +1,4 @@
-rootProject.name = "oshanraina"
-include("container")
+rootProject.name = "mizu-oshanraina"
+
+include("api")
 include("pipeline")
