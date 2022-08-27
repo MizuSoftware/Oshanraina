@@ -1,0 +1,7 @@
+[versions]
+guava = "31.1-jre"
+javapoet = "1.13.0"
+
+[libraries]
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }

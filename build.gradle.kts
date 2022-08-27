@@ -3,6 +3,7 @@ val javaVersion = JavaVersion.VERSION_1_8
 subprojects {
     apply(plugin = "java-library")
     apply(plugin = "maven-publish")
+    apply(plugin = "signing")
 
     group = "wtf.mizu"
     version = "0.1.0"
@@ -38,8 +39,17 @@ subprojects {
         publications {
             create("mavenJava", MavenPublication::class.java) {
                 from(components["java"])
+
+                pom {
+                    name.set("Oshanraina")
+                    url.set("https://github.com/MizuSoftware/Oshanraina")
+                }
             }
         }
+    }
+
+    configure<SigningExtension> {
+        sign(configurations["archives"])
     }
 
     tasks.withType<JavaCompile> {
