@@ -1,3 +1,3 @@
-# Oshanraina 🛳️
+# oshanraina 🛳️
 
 ` // TODO: README.md `
