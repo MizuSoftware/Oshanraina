@@ -28,9 +28,6 @@ subprojects {
             )
         }
 
-        sourceCompatibility = javaVersion
-        targetCompatibility = javaVersion
-
         withJavadocJar()
         withSourcesJar()
     }
@@ -84,10 +81,5 @@ subprojects {
                 }
             }
         }
-    }
-
-    tasks.withType<JavaCompile> {
-        sourceCompatibility = javaVersion.toString()
-        targetCompatibility = javaVersion.toString()
     }
 }
